@@ -1,13 +1,15 @@
 import {Component} from 'angular2/core'; 
+import {ProductListComponent} from './products/product-list.component';
 
 @Component({
     selector: 'pm-app',
     template: `
-    <div>
+    <div class="container">
     <h1>{{pageTitle}}</h1>
-    <div>Julius' 1st Component</div>
+    <pm-products></pm-products>
 </div>
-    `
+    ` , 
+    directives: [ProductListComponent]
 })
 export class AppComponent {
     pageTitle: string = 'Julius Product Management'    
