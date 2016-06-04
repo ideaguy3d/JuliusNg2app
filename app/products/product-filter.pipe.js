@@ -1,7 +1,7 @@
 /**
  * Created by Julius Hernandez on 6/3/2016.
  */
-System.register(['angular2/core', './products/product-list.component'], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,33 +13,34 @@ System.register(['angular2/core', './products/product-list.component'], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, product_list_component_1;
-    var AppComponent;
+    var core_1;
+    var ProductFilterPipe;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (product_list_component_1_1) {
-                product_list_component_1 = product_list_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                    this.pageTitle = 'Julius Product Management';
+            ProductFilterPipe = (function () {
+                function ProductFilterPipe() {
                 }
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: 'pm-app',
-                        template: "\n    <div class=\"container\">\n    <h1>{{pageTitle}}</h1>\n    <pm-products></pm-products>\n</div>\n    ",
-                        directives: [product_list_component_1.ProductListComponent]
+                ProductFilterPipe.prototype.transform = function (value, args) {
+                    var filter = args[0] ? args[0].toLocaleLowerCase() : null;
+                    return filter ? value.filter(function (product) {
+                        return product.productName.toLocaleLowerCase().indexOf(filter) != -1;
+                    }) : value;
+                };
+                ProductFilterPipe = __decorate([
+                    core_1.Pipe({
+                        name: 'productFilter'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], ProductFilterPipe);
+                return ProductFilterPipe;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("ProductFilterPipe", ProductFilterPipe);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+// 
+//# sourceMappingURL=product-filter.pipe.js.map

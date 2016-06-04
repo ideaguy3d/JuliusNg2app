@@ -1,4 +1,7 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+/**
+ * Created by Julius Hernandez on 6/3/2016.
+ */
+System.register(['angular2/core', "./product-filter.pipe"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,28 +13,76 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, product_filter_pipe_1;
     var ProductListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (product_filter_pipe_1_1) {
+                product_filter_pipe_1 = product_filter_pipe_1_1;
             }],
         execute: function() {
             ProductListComponent = (function () {
                 function ProductListComponent() {
-                    this.pageTitle = 'Product List';
+                    this.pageTitle = 'Products from Julius';
+                    this.imageWidth = 50;
+                    this.imageMargin = 2;
+                    this.showImage = false;
+                    this.listFilter = 'cart';
+                    //mock json data
+                    this.products = [
+                        {
+                            "productId": 2,
+                            "productName": "Garden Cart",
+                            "productCode": "GDN-0023",
+                            "releaseDate": "March 18, 2016",
+                            "description": "15 gallon capacity rolling garden cart",
+                            "price": 32.99,
+                            "starRating": 4.2,
+                            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+                        },
+                        {
+                            "productId": 5,
+                            "productName": "Hammer",
+                            "productCode": "TBX-0048",
+                            "releaseDate": "May 21, 2016",
+                            "description": "Curved claw steel hammer",
+                            "price": 8.9,
+                            "starRating": 4.8,
+                            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+                        },
+                        {
+                            "productId": 8,
+                            "productName": "Saw",
+                            "productCode": "TBX-0022",
+                            "releaseDate": "May 15, 2016",
+                            "description": "15-inch steel blade hand saw",
+                            "price": 11.55,
+                            "starRating": 3.7,
+                            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png"
+                        }
+                    ];
                 }
+                ProductListComponent.prototype.toggleImage = function () {
+                    this.showImage = !this.showImage;
+                };
+                ProductListComponent.prototype.ngOnInit = function () {
+                    console.log("OnInit happened.");
+                };
                 ProductListComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-products',
-                        templateUrl: 'app/products/product-list.component.html'
+                        templateUrl: 'app/products/product-list.component.html',
+                        styleUrls: ['app/products/product-list.component.css'],
+                        pipes: [product_filter_pipe_1.ProductFilterPipe]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ProductListComponent);
                 return ProductListComponent;
             }());
-            exports_1("ProductListComponent", ProductListComponent);
+            exports_1("ProductListComponent", ProductListComponent); //end of classProductListComponent
         }
     }
 });

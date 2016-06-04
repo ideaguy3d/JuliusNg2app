@@ -4,9 +4,9 @@
 <head>
     <title>Julius3D</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="app/app.component.css" rel="stylesheet" />
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="app/app.component.css" rel="stylesheet"/>
 
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
@@ -22,21 +22,28 @@
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('app/main')
+                .then(null, console.error.bind(console));
     </script>
 </head>
 
 
-<body>  
-  <pm-app>jApp is Loading...</pm-app>
+<body>
+
+<pm-app>
+    <div class="container">
+        <img src="app/assets/images/ideaguy2d.png" alt="img" class="img img-rounded center-block">
+        <h1 class="text-center">jApp is Loading... <img src="app/assets/images/ajax-loader1.gif" alt="loader"></h1>
+    </div>
+</pm-app>
+
 </body>
 
 </html>

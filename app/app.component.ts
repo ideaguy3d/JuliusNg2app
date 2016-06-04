@@ -1,4 +1,8 @@
-import {Component} from 'angular2/core'; 
+/**
+ * Created by Julius Hernandez on 6/3/2016.
+ */
+
+import {Component} from 'angular2/core';
 import {ProductListComponent} from './products/product-list.component';
 
 @Component({
