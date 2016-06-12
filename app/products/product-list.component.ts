@@ -4,60 +4,45 @@
 
 import {Component, OnInit} from 'angular2/core';
 import {IProduct} from './product';
-import {ProductFilterPipe} from "./product-filter.pipe";
+import {ProductFilterPipe} from './product-filter.pipe';
+import {StarComponent} from '../shared/star.component';
+import {ProductService} from './product.service';
+
+//here is the HTTP stuff.
+import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
-    selector: 'pm-products',
     templateUrl: 'app/products/product-list.component.html',
     styleUrls: ['app/products/product-list.component.css'],
-    pipes: [ProductFilterPipe]
+    pipes: [ProductFilterPipe],
+    directives: [StarComponent, ROUTER_DIRECTIVES]
 })
-export class ProductListComponent implements OnInit{
-    pageTitle: string = 'Products from Julius';
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
-    listFilter: string = 'cart';
+export class ProductListComponent implements OnInit {
+    pageTitle:string = 'Products from Julius';
+    imageWidth:number = 50;
+    imageMargin:number = 2;
+    showImage:boolean = false;
+    listFilter:string = '';
+    products:IProduct[];
+    errorMessage:string;
 
-    //mock json data
-    products: IProduct[] = [
-        {
-            "productId": 2,
-            "productName": "Garden Cart",
-            "productCode": "GDN-0023",
-            "releaseDate": "March 18, 2016",
-            "description": "15 gallon capacity rolling garden cart",
-            "price": 32.99,
-            "starRating": 4.2,
-            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
-        },
-        {
-            "productId": 5,
-            "productName": "Hammer",
-            "productCode": "TBX-0048",
-            "releaseDate": "May 21, 2016",
-            "description": "Curved claw steel hammer",
-            "price": 8.9,
-            "starRating": 4.8,
-            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
-        },
-        {
-            "productId": 8,
-            "productName": "Saw",
-            "productCode": "TBX-0022",
-            "releaseDate": "May 15, 2016",
-            "description": "15-inch steel blade hand saw",
-            "price": 11.55,
-            "starRating": 3.7,
-            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png"
-        }
-    ];
+    constructor(private _productService:ProductService) {}
 
-    toggleImage(): void {
+    toggleImage():void {
         this.showImage = !this.showImage;
     }
 
-    ngOnInit(): void {
-        console.log("OnInit happened.");
+    ngOnInit():void {
+        //the component has been initialized by ng2
+        this._productService.getProducts()
+            .subscribe(
+                products => this.products = products,
+                err => this.errorMessage = <any>err);
+    }
+
+    onRatingClicked(message:string):void {
+        this.pageTitle = 'zProduct List: ' + message;
     }
 } //end of classProductListComponent
